@@ -1,0 +1,51 @@
+<div>
+  <h2>{{user.name}}</h2>
+    {{error}}
+</div>
+
+<!--diretiva ng-show checa Truthiness, se estiver vazia = false, ou se for 0, ou nula, ou undefined -->
+<!--Como antes de fazer a busca, user está undefined, ele nao irá mostrar essa image-->
+<div >
+  <img ng-src="{{user.avatar_url}}" alt="Person" style="width:100px; height:100px;" title="{{user.name}}" /> Order:
+  <!--Colocando o ng-model e atribuindo à variavel para selecionar a partir de qual atributo será feita a ordem-->
+  <select class="form-control" ng-model="repoSortOrder">
+    <!--Cada um corresponde à um filtro -->
+    <option value="+name">Name</option>
+    <option value="-stargazers_count">Stars</option>
+    <option value="+language">Language</option>
+  </select>
+
+</div>
+
+
+
+<!--Negando a truthiness do user, se estiver vazio não será mostrada -->
+<table class="table table-bordered" >
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Stars</th>
+      <th>Language</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Foreach expression na variavel do $scope repos -->
+    <!--(-stargazer_count)é a propriedade pela qual será feita o filtro. o (-) significa desc (+) = asc -->
+    <!--<tr ng-repeat="repo in repos | orderBy: '-stargazers_count'">-->
+    <tr ng-repeat="repo in repos | orderBy: repoSortOrder">
+      <!--Com essa repoSortOrder o angular irá procurar essa propriedade dentro do $scope para fazer o filtro-->
+        
+        
+        <!--Montando a url dessa maneira que é como o github service irá ler-->
+      <td><a href="#/repos/{{user.login}}/{{repo.name}}">{{repo.name}}</a></td>
+      <!-- | number = filtro - formata para number  -->
+      <td>{{repo.stargazers_count | number }} </td>
+      <td>{{repo.language}}</td>
+
+    </tr>
+  </tbody>
+
+</table>
+<a href="#/main">Back to Search</a>
+
+

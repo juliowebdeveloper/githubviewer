@@ -1,0 +1,8 @@
+ <div > <!-- Não precisa especificar mais o controller aqui, ja que está especificado no app.config-->
+
+    {{ countdown }}
+        <form name="searchUser" ng-submit="search(username)">
+      <input class="form-control" placeholder="Username to find" required="true" type="search" ng-model="username" />
+      <input type="submit" value="Find User" class="btn btn-default" />
+    </form>
+  </div>
